@@ -1,12 +1,39 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-neutral: oklch(0% 0 0); /* #000000 */
+  --color-success: oklch(91.6% 0.667 143.38); /* #79fb7f */
+  --color-error: oklch(62.34% 0.686 24.1); /* #ff4c4c */
+  --color-disabled: oklch(62.8% 0.005 254.56); /* #999999 */
+
+  --color-primary-50: oklch(93.7% 0.091 282.72); /* #e6e4ff */
+  --color-primary-100: oklch(88.94% 0.151 282.53); /* #d9d6ff */
+  --color-primary-200: oklch(79.42% 0.265 282.22); /* #c0bcff */
+  --color-primary-300: oklch(70.1% 0.369 282.05); /* #a6a1ff */
+  --color-primary-400: oklch(56.1% 0.474 281.92); /* #7a73ff */
+  --color-primary-500: oklch(40.52% 0.534 281.9); /* #3c2eff */
+  --color-primary-600: oklch(36.66% 0.536 282.2); /* #3529e6 */
+  --color-primary-700: oklch(32.21% 0.531 282.6); /* #2d23cc */
+  --color-primary-800: oklch(27.26% 0.513 283.19); /* #261da3 */
+  --color-primary-900: oklch(21.8% 0.475 284.13); /* #1e177a */
+  --color-primary-950: oklch(17.06% 0.427 285.09); /* #171252 */
 }
 
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
