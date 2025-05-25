@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { CalendarClock, PhoneCall, Search } from "lucide-react";
+import { CalendarClock, PhoneCall } from "lucide-react";
 
 interface HeadingComponentProps {
   title: string;
@@ -25,7 +25,6 @@ const HeadingComponent: React.FC<HeadingComponentProps> = ({ title }) => {
       <div className="flex-shrink-0 flex flex-row gap-4">
         <CalendarClock size={25} className="cursor-pointer" />
         <PhoneCall size={25} className="cursor-pointer" />
-        <Search size={25} className="cursor-pointer" />
       </div>
     </div>
   );

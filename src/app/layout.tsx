@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import HeadingComponent from "./components/HeadingComponent";
-import BottomStickyNavComponent from "./components/BottomStickyNavComponent";
-import "./styles/globals.css";
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,18 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <div className="relative w-full min-h-full flex flex-col items-center">
-          <div className="w-full flex flex-col items-center flex-1">
-            <div className="w-full flex justify-center items-center sticky top-0 z-10 bg-white">
-              <HeadingComponent title="Ti' Poulet" />
-            </div>
-            {children}
-          </div>
-
-          <BottomStickyNavComponent />
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

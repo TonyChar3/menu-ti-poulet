@@ -12,7 +12,7 @@ const PlateCardsComponent: React.FC<PlateCardsComponentProps> = ({
 }) => {
   return (
     <a
-      href={`plates/${plate_id}`}
+      href={`pages/plates/${plate_id}`}
       className="block"
       style={{ textDecoration: "none", color: "inherit" }}
     >
