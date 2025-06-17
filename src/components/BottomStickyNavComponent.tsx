@@ -1,42 +1,42 @@
 "use client";
 import React from "react";
 import { ChevronUp } from "lucide-react";
-import WelcomePageComponent from "./WelcomePageComponent";
+import Link from "next/link";
+import { useLayout } from "@/context/LayoutContext";
 
 const BottomStickyNavComponent: React.FC = () => {
-  const [expanded, setExpanded] = React.useState(false);
+  const {
+    toggleWelcomePageOverlay,
+    setSelectCategory,
+    welcomePageOverlay,
+    menu_data,
+  } = useLayout();
+
+  const ReturnAction = () => {
+    if (menu_data?.mobile_layout.main_page) {
+      toggleWelcomePageOverlay();
+      setSelectCategory("");
+    }
+  };
 
   return (
     <>
-      {/* Fullscreen overlay with smooth up/down animation */}
-      <div
-        className={`fixed inset-0 z-50 w-full h-full bg-white flex flex-col transition-transform duration-500 ease-in-out ${
-          expanded ? "translate-y-0" : "translate-y-full"
-        }`}
-        style={{
-          transform: expanded ? "translateY(0%)" : "translateY(100%)",
-        }}
-      >
-        <WelcomePageComponent />
-      </div>
-
-      {!expanded && <div className="w-full h-15"></div>}
+      {!welcomePageOverlay && <div className="w-full h-15"></div>}
 
       {/* Bottom sticky nav */}
       <div
-        className={`${
-          expanded ? "sticky bottom-0" : "fixed bottom-0"
-        } w-[35%] shadow-md shadow-gray-300 rounded-t-3xl bg-white flex flex-col items-center transition-all duration-500 z-60`}
+        className={`fixed bottom-0 w-[35%] shadow-md shadow-gray-300 rounded-t-3xl bg-white flex flex-col items-center transition-all duration-500 z-60`}
       >
         {/* Chevron button, only visible when not expanded */}
-        {!expanded && (
-          <button
-            onClick={() => setExpanded(true)}
+        {!welcomePageOverlay && (
+          <Link
+            href={`/?uid=${menu_data?.id}`}
+            onClick={() => ReturnAction()}
             className="focus:outline-none mb-1"
             aria-label="Expand menu"
           >
             <ChevronUp size={25} />
-          </button>
+          </Link>
         )}
 
         {/* Name of company bar, always at the bottom, same size */}

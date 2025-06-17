@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { LayoutProvider } from "@/context/LayoutContext";
+import { AnimatePresence } from "framer-motion";
 
 import MainPage from "./main/page";
 
@@ -20,9 +22,17 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative w-full min-h-full flex flex-col items-center">
-        {menu_state != "" ? <MainPage uid={menu_state} /> : <p>Loading...</p>}
-      </div>
+      <AnimatePresence mode="wait">
+        <LayoutProvider>
+          <div className="relative w-full h-full flex flex-col items-center">
+            {menu_state != "" ? (
+              <MainPage uid={menu_state} />
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
+        </LayoutProvider>
+      </AnimatePresence>
     </>
   );
 }

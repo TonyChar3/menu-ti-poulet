@@ -1,14 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
-import PlateCardsComponents from "../../components/PlateCardsComponent";
-import HeadingComponent from "../../components/HeadingComponent";
+import React, { useEffect, useState } from "react";
 import BottomStickyNavComponent from "../../components/BottomStickyNavComponent";
+import WelcomePageComponent from "@/components/WelcomePageComponent";
+import { useLayout } from "@/context/LayoutContext";
+import { motion } from "framer-motion";
 
 import { MenuResponse } from "@/types/MenuItem";
-
-interface MenuData {
-  items: MenuResponse[];
-}
+import SelectCategoryMainPage from "@/components/SelectCategoryMainPage";
 
 interface MainPageComponentProps {
   uid: string;
@@ -21,22 +19,34 @@ async function getMenuData(uid: string) {
     throw new Error("Failed to fetch user data");
   }
   const data = await res.json();
-  console.log(data);
   return data;
 }
 
 const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
-  // Dummy data for now
-  const appetizers = [
-    { id: "1", name: "Spring Rolls" },
-    { id: "2", name: "Chicken Wings" },
-  ];
+  const {
+    setWelcomePageOverlay,
+    setMenuData,
+    select_category,
+    setHamburgerNavLayout,
+    setMainPageLayout,
+    main_page_layout,
+    hamburger_nav_layout,
+  } = useLayout();
 
   useEffect(() => {
     if (uid) {
       getMenuData(uid)
-        .then((data) => {
-          console.log(data);
+        .then((data: MenuResponse) => {
+          if (data.menu.mobile_layout.main_page) {
+            setMainPageLayout(true);
+            setHamburgerNavLayout(false);
+            setWelcomePageOverlay(true);
+            setMenuData(data.menu);
+          } else if (data.menu.mobile_layout.hamburger_navigation) {
+            setMainPageLayout(false);
+            setHamburgerNavLayout(false);
+            setMenuData(data.menu);
+          }
         })
         .catch((err) => {
           console.error("Error fetching menu data:", err);
@@ -44,30 +54,35 @@ const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
     }
   }, [uid]);
 
+  useEffect(() => {}, []);
+
   return (
     <>
-      <div className="w-full flex flex-col items-center flex-1">
-        <div className="w-full flex justify-center items-center sticky top-0 z-10 bg-white">
-          <HeadingComponent title="Ti' Poulet" />
-        </div>
-        <div className="w-full px-4 mt-4">
-          <h2 className="text-2xl font-bold">Appetizers</h2>
-        </div>
-        <div className="w-full flex flex-col justify-center items-center">
-          {appetizers.length > 0 ? (
-            appetizers.map((item: any) => (
-              <PlateCardsComponents
-                key={item.id}
-                title={item.name}
-                plate_id={item.id}
-              />
-            ))
-          ) : (
-            <span>No items available</span>
-          )}
-        </div>
-      </div>
-
+      {/* {main_page_layout && <WelcomePageComponent />} */}
+      {main_page_layout && select_category.length <= 0 && (
+        <motion.div
+          key="welcome"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+          className={"w-full h-full flex flex-col"}
+        >
+          <WelcomePageComponent />
+        </motion.div>
+      )}
+      {(hamburger_nav_layout ||
+        (main_page_layout && select_category.length > 0)) && (
+        <motion.div
+          key="category"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <SelectCategoryMainPage />
+        </motion.div>
+      )}
       <BottomStickyNavComponent />
     </>
   );
