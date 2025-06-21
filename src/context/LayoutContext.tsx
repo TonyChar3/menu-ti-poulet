@@ -18,9 +18,7 @@ type LayoutContextType = {
   select_category: string;
   setSelectCategory: (value: string) => void;
   main_page_layout: boolean;
-  hamburger_nav_layout: boolean;
   setMainPageLayout: (value: boolean) => void;
-  setHamburgerNavLayout: (value: boolean) => void;
 };
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
@@ -34,7 +32,6 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
   const [menu_data, setMenuData] = useState<Menu | null>(null);
   const [select_category, setSelectCategory] = useState("");
   const [main_page_layout, setMainPageLayout] = useState(false);
-  const [hamburger_nav_layout, setHamburgerNavLayout] = useState(false);
 
   const toggleWelcomePageOverlay = useCallback(() => {
     setWelcomePageOverlay((prev) => !prev);
@@ -53,8 +50,6 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
     select_category,
     setSelectCategory,
     main_page_layout,
-    hamburger_nav_layout,
-    setHamburgerNavLayout,
     setMainPageLayout,
   };
 

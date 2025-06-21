@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BottomStickyNavComponent from "../../components/BottomStickyNavComponent";
 import WelcomePageComponent from "@/components/WelcomePageComponent";
 import { useLayout } from "@/context/LayoutContext";
@@ -27,10 +27,8 @@ const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
     setWelcomePageOverlay,
     setMenuData,
     select_category,
-    setHamburgerNavLayout,
     setMainPageLayout,
     main_page_layout,
-    hamburger_nav_layout,
   } = useLayout();
 
   useEffect(() => {
@@ -39,12 +37,10 @@ const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
         .then((data: MenuResponse) => {
           if (data.menu.mobile_layout.main_page) {
             setMainPageLayout(true);
-            setHamburgerNavLayout(false);
             setWelcomePageOverlay(true);
             setMenuData(data.menu);
           } else if (data.menu.mobile_layout.hamburger_navigation) {
             setMainPageLayout(false);
-            setHamburgerNavLayout(false);
             setMenuData(data.menu);
           }
         })
@@ -54,11 +50,8 @@ const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
     }
   }, [uid]);
 
-  useEffect(() => {}, []);
-
   return (
     <>
-      {/* {main_page_layout && <WelcomePageComponent />} */}
       {main_page_layout && select_category.length <= 0 && (
         <motion.div
           key="welcome"
@@ -71,14 +64,13 @@ const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
           <WelcomePageComponent />
         </motion.div>
       )}
-      {(hamburger_nav_layout ||
-        (main_page_layout && select_category.length > 0)) && (
+      {main_page_layout && select_category.length > 0 && (
         <motion.div
           key="category"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8 }}
         >
           <SelectCategoryMainPage />
         </motion.div>
