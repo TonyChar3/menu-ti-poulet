@@ -19,6 +19,8 @@ type LayoutContextType = {
   setSelectCategory: (value: string) => void;
   main_page_layout: boolean;
   setMainPageLayout: (value: boolean) => void;
+  scroll_extended: boolean;
+  setScrollExtended: (value: boolean) => void;
 };
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
@@ -32,14 +34,13 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
   const [menu_data, setMenuData] = useState<Menu | null>(null);
   const [select_category, setSelectCategory] = useState("");
   const [main_page_layout, setMainPageLayout] = useState(false);
+  const [scroll_extended, setScrollExtended] = useState(false);
 
   const toggleWelcomePageOverlay = useCallback(() => {
     setWelcomePageOverlay((prev) => !prev);
   }, []);
 
-  useEffect(() => {
-    console.log("welcomePageOverlay changed:", welcomePageOverlay);
-  }, [welcomePageOverlay]);
+  useEffect(() => {}, []);
 
   const value: LayoutContextType = {
     welcomePageOverlay,
@@ -51,6 +52,8 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
     setSelectCategory,
     main_page_layout,
     setMainPageLayout,
+    scroll_extended,
+    setScrollExtended,
   };
 
   return (
