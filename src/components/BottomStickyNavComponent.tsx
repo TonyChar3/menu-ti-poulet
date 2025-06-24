@@ -25,7 +25,7 @@ const BottomStickyNavComponent: React.FC = () => {
 
       {/* Bottom sticky nav */}
       <div
-        className={`fixed bottom-0 w-[35%] shadow-md shadow-gray-300 rounded-t-3xl bg-white flex flex-col items-center transition-all duration-500 z-60`}
+        className={`fixed bottom-0 w-[35%] lg:w-[15%] shadow-md shadow-gray-300 rounded-t-3xl bg-white flex flex-col items-center transition-all duration-500 z-60`}
       >
         {/* Chevron button, only visible when not expanded */}
         {!welcomePageOverlay && (
