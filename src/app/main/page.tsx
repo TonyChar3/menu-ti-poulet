@@ -71,6 +71,7 @@ const MainPage: React.FC<MainPageComponentProps> = ({ uid }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.4 }}
+          className={"w-full h-full flex flex-col"}
         >
           <SelectCategoryMainPage />
         </motion.div>
