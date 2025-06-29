@@ -32,7 +32,7 @@ const BottomStickyNavComponent: React.FC = () => {
           <Link
             href={`/?uid=${menu_data?.id}`}
             onClick={() => ReturnAction()}
-            className="focus:outline-none mb-1"
+            className="focus:outline-none mb-1 lg:hidden"
             aria-label="Expand menu"
           >
             <ChevronUp size={25} />
