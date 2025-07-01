@@ -5,6 +5,7 @@ import { LayoutProvider } from "@/context/LayoutContext";
 import { AnimatePresence } from "framer-motion";
 
 import MainPage from "./main/page";
+import InfoSchedulePopUpComponent from "@/components/ui_controls/modals/InfoSchedulePopUpComponent";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -30,6 +31,7 @@ export default function Home() {
             ) : (
               <p>Loading...</p>
             )}
+            <InfoSchedulePopUpComponent />
           </div>
         </LayoutProvider>
       </AnimatePresence>

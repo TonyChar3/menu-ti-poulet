@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import SelectCategoryMainPage from "@/components/SelectCategoryMainPage";
-import BottomStickyNavComponent from "@/components/BottomStickyNavComponent";
+import SelectCategoryMainPage from "@/components/layout/SelectCategoryMainPage";
+import BottomStickyNavComponent from "@/components/ui_controls/BottomStickyNavComponent";
 
 interface CategoryPageProps {
   params: {
