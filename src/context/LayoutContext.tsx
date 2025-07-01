@@ -12,6 +12,7 @@ import { Menu } from "@/types/MenuItem";
 type LayoutContextType = {
   welcomePageOverlay: boolean;
   toggleWelcomePageOverlay: () => void;
+  toggleInfoScheduleMobileModal: () => void;
   setWelcomePageOverlay: (value: boolean) => void;
   menu_data: Menu | null;
   setMenuData: React.Dispatch<React.SetStateAction<Menu | null>>;
@@ -21,6 +22,10 @@ type LayoutContextType = {
   setMainPageLayout: (value: boolean) => void;
   scroll_extended: boolean;
   setScrollExtended: (value: boolean) => void;
+  modal_state: boolean;
+  setModalState: (value: boolean) => void;
+  modal_mode: string;
+  setModalMode: (value: string) => void;
 };
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
@@ -35,12 +40,16 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
   const [select_category, setSelectCategory] = useState("");
   const [main_page_layout, setMainPageLayout] = useState(false);
   const [scroll_extended, setScrollExtended] = useState(false);
+  const [modal_state, setModalState] = useState(false);
+  const [modal_mode, setModalMode] = useState("");
 
   const toggleWelcomePageOverlay = useCallback(() => {
     setWelcomePageOverlay((prev) => !prev);
   }, []);
 
-  useEffect(() => {}, []);
+  const toggleInfoScheduleMobileModal = useCallback(() => {
+    setModalState((prev) => !prev);
+  }, []);
 
   const value: LayoutContextType = {
     welcomePageOverlay,
@@ -54,6 +63,11 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
     setMainPageLayout,
     scroll_extended,
     setScrollExtended,
+    modal_mode,
+    setModalMode,
+    setModalState,
+    modal_state,
+    toggleInfoScheduleMobileModal,
   };
 
   return (

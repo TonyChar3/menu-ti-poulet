@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
-import BottomStickyNavComponent from "../../components/BottomStickyNavComponent";
-import WelcomePageComponent from "@/components/WelcomePageComponent";
+import BottomStickyNavComponent from "../../components/ui_controls/BottomStickyNavComponent";
+import WelcomePageComponent from "@/components/layout/WelcomePageComponent";
 import { useLayout } from "@/context/LayoutContext";
 import { motion } from "framer-motion";
 
 import { MenuResponse } from "@/types/MenuItem";
-import SelectCategoryMainPage from "@/components/SelectCategoryMainPage";
+import SelectCategoryMainPage from "@/components/layout/SelectCategoryMainPage";
 
 interface MainPageComponentProps {
   uid: string;

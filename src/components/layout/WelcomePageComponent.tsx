@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import { CalendarClock, Phone } from "lucide-react";
 import Image from "next/image";
+import { ConstantsVariables } from "@/helpers/ConstantsVariables";
 
-import PlateCategoryCardsComponent from "./PlateCategoryCardsComponent";
-import WelcomePageControlsButtonComponent from "./WelcomePageControlsButtonComponent";
+import PlateCategoryCardsComponent from "../ui_controls/PlateCategoryCardsComponent";
+import WelcomePageControlsButtonComponent from "../ui_controls/buttons/WelcomePageControlsButtonComponent";
 
 const WelcomePageComponent: React.FC = () => {
   const [is_expanded, setIsExpanded] = useState(false);
@@ -54,8 +55,14 @@ const WelcomePageComponent: React.FC = () => {
       <div className="w-full h-full flex flex-col relative">
         {/* Top right icons */}
         <div className="hidden absolute top-6 right-6 lg:flex space-x-4 z-10">
-          <CalendarClock className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700" />
-          <Phone className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700" />
+          <WelcomePageControlsButtonComponent
+            icon={<CalendarClock size={24} className="text-gray-700" />}
+            text={ConstantsVariables.SCHEDULE_MODE_FR}
+          />
+          <WelcomePageControlsButtonComponent
+            icon={<Phone size={24} className="text-gray-700" />}
+            text={ConstantsVariables.INFO_MODE_FR}
+          />
         </div>
 
         {/* Header section - fixed height */}
@@ -93,7 +100,7 @@ const WelcomePageComponent: React.FC = () => {
               is_expanded ? "mt-2" : "mt-3 lg:mt-4"
             }`}
           >
-            Restaurant name
+            {ConstantsVariables.RESTAURANT_NAME}
           </h1>
         </div>
 
@@ -109,8 +116,6 @@ const WelcomePageComponent: React.FC = () => {
                 ? "px-4 pb-4 lg:py-4 h-full overflow-y-auto rounded-b-4xl mb:rounded-b-2xl"
                 : "px-6 pb-6 max-h-[40vh] lg:py-4 lg:max-h-[50vh] overflow-hidden"
             }`}
-            onWheel={handleWheel}
-            onTouchStart={handleTouchStart}
             style={{
               minHeight: is_expanded
                 ? "0"
@@ -122,20 +127,26 @@ const WelcomePageComponent: React.FC = () => {
             <div className="flex justify-between items-center w-full md:w-[80%] mt-2 mb-3 p-2 md:mt-4 md:mb-6 md:mx-auto lg:hidden rounded-xl">
               <WelcomePageControlsButtonComponent
                 icon={<CalendarClock size={24} className="text-gray-700" />}
-                text={"horaire"}
+                text={ConstantsVariables.SCHEDULE_MODE_FR}
               />
               <WelcomePageControlsButtonComponent
                 icon={<Phone size={24} className="text-gray-700" />}
-                text={"information"}
+                text={ConstantsVariables.INFO_MODE_FR}
               />
             </div>
-            {visibleCategories.map((category) => (
-              <PlateCategoryCardsComponent
-                key={category.id}
-                title={category.name}
-                category_id={category.id}
-              />
-            ))}
+            <div
+              className="w-full flex flex-col justify-center items-center"
+              onWheel={handleWheel}
+              onTouchStart={handleTouchStart}
+            >
+              {visibleCategories.map((category) => (
+                <PlateCategoryCardsComponent
+                  key={category.id}
+                  title={category.name}
+                  category_id={category.id}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

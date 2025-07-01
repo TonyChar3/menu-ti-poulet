@@ -1,8 +1,8 @@
 import React from "react";
 
 import HeaderComponent from "./HeaderComponent";
-import PlateCardsComponents from "../components/PlateCardsComponent";
-import PlateCategoryCardsComponent from "./PlateCategoryCardsComponent";
+import PlateCardsComponents from "../ui_controls/PlateCardsComponent";
+import PlateCategoryCardsComponent from "../ui_controls/PlateCategoryCardsComponent";
 
 const SelectCategoryMainPage: React.FC = () => {
   // Dummy data for now
