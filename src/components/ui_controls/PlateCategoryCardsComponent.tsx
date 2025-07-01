@@ -10,11 +10,14 @@ interface PlateCategoryCardsComponentProps {
 const PlateCategoryCardsComponent: React.FC<
   PlateCategoryCardsComponentProps
 > = ({ title, category_id }) => {
-  const { toggleWelcomePageOverlay, setSelectCategory } = useLayout();
+  const { welcomePageOverlay, toggleWelcomePageOverlay, setSelectCategory } =
+    useLayout();
 
   const CategorySelected = () => {
     setSelectCategory(category_id.toString());
-    toggleWelcomePageOverlay();
+    if (!welcomePageOverlay) {
+      toggleWelcomePageOverlay();
+    }
   };
 
   return (
